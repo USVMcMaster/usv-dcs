@@ -63,7 +63,7 @@ You will see the following message: <br />
 
 **8. Make your own personal branch and clone master** <br />
 git checkout -b "name of your new branch" <br />
-git checkout "name of your new brach <br />
+git checkout "name of your new branch <br />
 git pull origin master <br />
 
 **9. Make test file** <br />
