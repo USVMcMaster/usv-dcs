@@ -26,7 +26,7 @@ ssh-keygen -t rsa -b 4096 -C "your_email@domain.com" <br />
 
 You will get the following output: <br />
 *Generating public/private rsa key pair.* <br />
-*Enter file in which to save the key (/home/rohit/.ssh/id_rsa):* <br />
+*Enter file in which to save the key (/home/username/.ssh/id_rsa):* <br />
 Press enter. <br />
 
 *Enter passphrase (empty for no passphrase):* <br />
