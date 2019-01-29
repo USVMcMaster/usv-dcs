@@ -53,6 +53,8 @@ cd ./usvmac <br />
 git init <br />
 git remote add origin git@github.com:USVMcMaster/usv-dcs.git <br />
 
+**Note**: When you add origin, you will not get a confirmation message or anything. You can type git status afterward to check if its working. <br />
+
 **8. Make your own personal branch and clone master** <br />
 git checkout -b "name of your new branch" <br />
 git checkout "name of your new brach <br />
