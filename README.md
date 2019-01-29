@@ -52,11 +52,11 @@ mkdir usvmac <br />
 cd ./usvmac <br />
 git init <br />
 git remote add origin git@github.com:USVMcMaster/usv-dcs.git <br />
-git pull origin master <br />
 
 **8. Make your own personal branch and clone master** <br />
 git checkout -b "name of your new branch" <br />
 git checkout "name of your new brach <br />
+git pull origin master <br />
 
 **9. Make test file** <br />
 touch "yourname.txt" <br />
@@ -69,3 +69,6 @@ git commit "yourname.txt" <br />
 git push origin "name of your new branch" <br />
 
 Congrats, you have done your first push to github.
+
+**Note: Under no circumstances should you be on the master branch. DO NOT PUSH TO MASTER.** <br />
+**PUSHING TO MASTER WILL LEAD TO REMOVAL FROM PROJECT AND TEAM.**
