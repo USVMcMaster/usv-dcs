@@ -1,6 +1,6 @@
 **Welcome to the Unmanned Surface Vehicle - Automation Capstone Repo!**
 
-The following document assumes you have a fresh install of Ubuntu 18.04 and that you have a working internet connection. Also, by this point, you should have git account and have access to the git repo. If you have any pending updates from Ubuntu, please do them before going through this guide.
+The following document assumes you have a fresh install of Ubuntu 18.04. Also, by this point, you should have git account and have access to the git repo. If you have any pending updates from Ubuntu, please do them before going through this guide.
 
 **Notes:**
 All commands will be done through terminal.
