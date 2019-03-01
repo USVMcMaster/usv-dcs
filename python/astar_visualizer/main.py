@@ -1,7 +1,5 @@
 import pygame as pg
-import numpy as np
 import sys
-
 from os import path
 from settings import *
 from sprites import *
@@ -13,14 +11,14 @@ class Game:
         pg.display.set_caption(TITLE)
         self.clock = pg.time.Clock()
         pg.key.set_repeat(500, 100)
-        self.load_map()
+        self.load_data()
 
-    def load_map(self):
+    def load_data(self):
         game_folder = path.dirname(__file__)
-        self.map_data = np.array([])
+        self.map_data = []
         with open(path.join(game_folder, 'map.txt'), 'rt') as f:
             for line in f:
-                self.map_data = np.append(self.map_data, line)
+                self.map_data.append(line)
 
     def new(self):
         # initialize all variables and do all the setup for a new game
@@ -28,20 +26,41 @@ class Game:
         self.walls = pg.sprite.Group()
         for row, tiles in enumerate(self.map_data):
             for col, tile in enumerate(tiles):
-                if tile == '1':
+                if tile == 'W':
                     Wall(self, col, row)
                 if tile == 'P':
                     self.player = Player(self, col, row)
+                if tile == 'T':
+                    Target(self, col, row)
 
     def run(self):
         # game loop - set self.playing = False to end the game
         self.playing = True
-        
         while self.playing:
             self.dt = self.clock.tick(FPS) / 1000
             self.events()
             self.update()
             self.draw()
+
+    def quit(self):
+        pg.quit()
+        sys.exit()
+
+    def update(self):
+        # update portion of the game loop
+        self.all_sprites.update()
+
+    def draw_grid(self):
+        for x in range(0, WIDTH, TILESIZE):
+            pg.draw.line(self.screen, LIGHTGREY, (x, 0), (x, HEIGHT))
+        for y in range(0, HEIGHT, TILESIZE):
+            pg.draw.line(self.screen, LIGHTGREY, (0, y), (WIDTH, y))
+
+    def draw(self):
+        self.screen.fill(BGCOLOR)
+        self.draw_grid()
+        self.all_sprites.draw(self.screen)
+        pg.display.flip()
 
     def events(self):
         # catch all events here
@@ -60,26 +79,6 @@ class Game:
                 if event.key == pg.K_DOWN:
                     self.player.move(dy=1)
 
-    def update(self):
-        # update portion of the game loop
-        self.all_sprites.update()
-
-    def draw(self):
-        self.screen.fill(BGCOLOR)
-        self.draw_grid()
-        self.all_sprites.draw(self.screen)
-        pg.display.flip()
-
-    def draw_grid(self):
-        for x in range(0, WIDTH, TILESIZE):
-            pg.draw.line(self.screen, LIGHTGREY, (x, 0), (x, HEIGHT))
-        for y in range(0, HEIGHT, TILESIZE):
-            pg.draw.line(self.screen, LIGHTGREY, (0, y), (WIDTH, y))
-
-    def quit(self):
-        pg.quit()
-        sys.exit()
-
     def show_start_screen(self):
         pass
 
@@ -87,10 +86,9 @@ class Game:
         pass
 
 # create the game object
-game = Game()
-game.show_start_screen()
-
+g = Game()
+g.show_start_screen()
 while True:
-    game.new()
-    game.run()
-    game.show_go_screen()
+    g.new()
+    g.run()
+    g.show_go_screen()
