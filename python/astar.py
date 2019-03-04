@@ -18,8 +18,15 @@ class Node():
     def __eq__(self, other):
         return self.position == other.position
 
+def return_path(current_node):
+    path = []
+    current = current_node
+    while current is not None:
+        path.append(current.position)
+        current = current.parent
+    return path[::-1]  # Return reversed path
 
-def astar(maze, start, end):
+def astar(maze, start, end, allow_diagonal_movement = False):
     """Returns a list of tuples as a path from the given start to the given end in the given maze"""
 
     # Create start node and end node objects
@@ -38,8 +45,19 @@ def astar(maze, start, end):
     # Add start node to open list
     open_list.append(start_node)
 
+    # Adding a stop condition
+    # outer_iterations = 0
+    # max_iterations = (len(maze) // 2) ** 2
+
+
+    # what squares do we search
+    adjacent_squares = ((0, -1), (0, 1), (-1, 0), (1, 0),)
+    if allow_diagonal_movement:
+        adjacent_squares = ((0, -1), (0, 1), (-1, 0), (1, 0), (-1, -1), (-1, 1), (1, -1), (1, 1),)
+
     # Loop until you run out of open list nodes
     while len(open_list) > 0:
+        # outer_iterations += 1
 
         #Get current node
         current_node = open_list[0]
@@ -50,23 +68,24 @@ def astar(maze, start, end):
                 current_node = item
                 current_index = index
 
+        # if outer_iterations > max_iterations:
+        #     # if we hit this point return the path such as it is
+        #     # it will not contain the destination
+        #     print("giving up on pathfinding too many iterations")
+        #     return return_path(current_node)
+
         # Pop current node from open list and add to closed list
         open_list.pop(current_index)
         closed_list.append(current_node)
 
         # Checks for goal
         if current_node == end_node:
-            path = []
-            current = current_node
-            
-            while current is not None:
-                path.append(current.position)
-                current = current.parent
-            return path[::-1] # Return reversed path
+            return return_path(current_node)
 
         # Generate children
         children = []
-        for new_position in [(0, -1), (0, 1), (-1, 0), (1, 0), (-1, -1), (-1, 1), (1, -1), (1, 1)]: # Adjacent squares
+
+        for new_position in adjacent_squares: # Adjacent squares
 
             # Get node position
             node_position = (current_node.position[0] + new_position[0], current_node.position[1] + new_position[1])
@@ -89,19 +108,17 @@ def astar(maze, start, end):
         for child in children:
 
             # Check if child is on closed list:
-            for closed_child in closed_list:
-                if child == closed_child:
-                    continue
+            if len([closed_child for closed_child in closed_list if closed_child == child]) > 0:
+                continue
 
             # Create f, g, and h cost values
             child.g = current_node.g + 1
             child.h = ((child.position[0] - end_node.position[0]) ** 2) + ((child.position[1] - end_node.position[1]) ** 2)
             child.f = child.g + child.h
 
-            # Check if child is on open list
-            for open_node in open_list:
-                if child == open_node and child.g > open_node.g:
-                    continue
+            # Child is already in the open list
+            if len([open_node for open_node in open_list if child == open_node and child.g > open_node.g]) > 0:
+                continue
 
             # Add the child to the open list
             open_list.append(child)
@@ -110,18 +127,18 @@ def astar(maze, start, end):
 def main():
 
     maze = [[0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+            [0, 1, 1, 0, 1, 1, 1, 0, 1, 0],
+            [0, 1, 0, 0, 0, 0, 1, 0, 1, 0],
+            [0, 1, 0, 0, 1, 1, 1, 0, 1, 0],
+            [0, 0, 0, 1, 1, 0, 0, 0, 1, 0],
+            [0, 1, 0, 0, 0, 0, 0, 1, 1, 0],
+            [0, 0, 0, 1, 1, 1, 1, 0, 0, 0],
+            [0, 0, 0, 0, 1, 0, 0, 0, 1, 1],
+            [0, 1, 0, 1, 1, 1, 0, 1, 0, 0],
+            [0, 1, 0, 0, 0, 1, 0, 0, 0, 0]]
 
     start = (0, 0)
-    end = (7, 6)
+    end = (8, 8)
 
     path = astar(maze, start, end)
     print(path)
