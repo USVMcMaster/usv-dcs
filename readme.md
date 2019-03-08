@@ -1,4 +1,4 @@
-# Code for Intel® RealSense™ Python Wrapper
+# Code for Intel® RealSense™ Python Wrapper.
 
 ### How to import RealSense?
 ```python
