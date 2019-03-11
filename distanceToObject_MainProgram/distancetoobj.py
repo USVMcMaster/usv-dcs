@@ -100,3 +100,30 @@ cv2.putText(crop_img, className,
             cv2.FONT_HERSHEY_COMPLEX, 0.5, (255,255,255))
 
 plt.imshow(crop_img)
+plt.show()
+
+#By projecting this data into the depth channel, we can now answer additional questions we couldn't approach before.
+#For example, with computer vision only it would be rather hard to make any meaningful predictions about size and distance. You could train a model on average dog size per breed, but it would be easily fooled by toys of dogs or dogs of irregular proportions. Instead you can get this information directly when you have depth available!
+#Let's project our detected bounding box on to the depth image, and average the depth data inside it to get a sense of how close is the object:
+
+
+scale = height / expected
+xmin_depth = int((xmin * expected + crop_start) * scale)
+ymin_depth = int((ymin * expected) * scale)
+xmax_depth = int((xmax * expected + crop_start) * scale)
+ymax_depth = int((ymax * expected) * scale)
+xmin_depth,ymin_depth,xmax_depth,ymax_depth
+cv2.rectangle(colorized_depth, (xmin_depth, ymin_depth),
+             (xmax_depth, ymax_depth), (255, 255, 255), 2)
+plt.imshow(colorized_depth)
+plt.show()
+
+depth = np.asanyarray(aligned_depth_frame.get_data())
+# Crop depth data:
+depth = depth[xmin_depth:xmax_depth,ymin_depth:ymax_depth].astype(float)
+
+# Get data scale from the device and convert to meters
+depth_scale = profile.get_device().first_depth_sensor().get_depth_scale()
+depth = depth * depth_scale
+dist,_,_,_ = cv2.mean(depth)
+print("Detected a {0} {1:.3} meters away.".format(className, dist))
