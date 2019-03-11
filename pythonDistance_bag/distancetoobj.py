@@ -12,6 +12,7 @@ pipe = rs.pipeline()
 cfg = rs.config()
 #cfg.enable_device_from_file("./object_detection.bag")
 
+
 profile = pipe.start(cfg)
 
 # Skip 5 first frames to give the Auto-Exposure time to adjust
@@ -35,7 +36,6 @@ color = np.asanyarray(color_frame.get_data())
 plt.rcParams["axes.grid"] = False
 plt.rcParams['figure.figsize'] = [12, 6]
 plt.imshow(color)
-plt.show()
 
 
 #Depth Data
@@ -44,7 +44,7 @@ plt.show()
 colorizer = rs.colorizer()
 colorized_depth = np.asanyarray(colorizer.colorize(depth_frame).get_data())
 plt.imshow(colorized_depth)
-plt.show()
+
 
 
 # Create alignment primitive with color as its target stream:
@@ -58,7 +58,7 @@ colorized_depth = np.asanyarray(colorizer.colorize(aligned_depth_frame).get_data
 # Show the two frames together:
 images = np.hstack((color, colorized_depth))
 plt.imshow(images)
-plt.show()
+
 
 #Now the two images are pixel-perfect aligned and you can use depth data just like you would any of the other channels.
 #Object Detection
@@ -117,7 +117,7 @@ xmin_depth,ymin_depth,xmax_depth,ymax_depth
 cv2.rectangle(colorized_depth, (xmin_depth, ymin_depth),
              (xmax_depth, ymax_depth), (255, 255, 255), 2)
 plt.imshow(colorized_depth)
-plt.show()
+
 
 depth = np.asanyarray(aligned_depth_frame.get_data())
 # Crop depth data:
