@@ -10,7 +10,8 @@ print("Environment Ready")
 # Setup:
 pipe = rs.pipeline()
 cfg = rs.config()
-cfg.enable_device_from_file("./object_detection.bag")
+#cfg.enable_device_from_file("./object_detection.bag")
+
 profile = pipe.start(cfg)
 
 # Skip 5 first frames to give the Auto-Exposure time to adjust
