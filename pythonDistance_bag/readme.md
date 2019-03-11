@@ -2,6 +2,5 @@
 
 #### Regarding missing file error, you need to have those two files in the script directory
 
-#### A basic search of these files can get you these files otherwise let me know
 
 #### For now I am going to try writting a C script that will detect distance of the object because there is countless examples using C
