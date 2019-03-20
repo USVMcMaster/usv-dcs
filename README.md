@@ -76,6 +76,3 @@ git commit "yourname.txt" <br />
 git push origin "name of your new branch" <br />
 
 Congrats, you have done your first push to github.
-
-**Note: Under no circumstances should you be on the master branch. DO NOT PUSH TO MASTER.** <br />
-**PUSHING TO MASTER WILL LEAD TO REMOVAL FROM PROJECT AND TEAM.**
