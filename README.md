@@ -51,7 +51,7 @@ cd ~ <br />
 mkdir usvmac <br />
 cd ./usvmac <br />
 git init <br />
-git remote add origin git@github.com:USVMcMaster/usv-dcs.git <br />
+git remote add origin git@github.com:USVMcMaster/usvmac.git <br />
 
 **Note**: When you add origin, you will not get a confirmation message or anything. You can type git status afterward to check if its working. <br />
 You will see the following message: <br />
