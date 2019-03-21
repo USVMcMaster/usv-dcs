@@ -1,0 +1,44 @@
+import QtQuick 2.0
+import QtQuick.Window 2.0
+import QtLocation 5.5
+import QtPositioning 5.5
+
+Window {
+    visible: true
+    title: "Python OSM"
+    width: 640
+    height: 480
+    Map {
+        id: map
+        anchors.fill: parent
+        plugin: Plugin {
+            name: "osm"
+        }
+        center: QtPositioning.coordinate(-12.0464, -77.0428)
+        zoomLevel: 14
+    }
+    Canvas {
+        id: root
+        anchors.fill : parent
+        property int wgrid: 20
+        onPaint: {
+            var ctx = getContext("2d")
+            ctx.lineWidth = 1
+            ctx.strokeStyle = "black"
+            ctx.beginPath()
+            var nrows = height/wgrid;
+            for(var i=0; i < nrows+1; i++){
+                ctx.moveTo(0, wgrid*i);
+                ctx.lineTo(width, wgrid*i);
+            }
+
+            var ncols = width/wgrid
+            for(var j=0; j < ncols+1; j++){
+                ctx.moveTo(wgrid*j, 0);
+                ctx.lineTo(wgrid*j, height);
+            }
+            ctx.closePath()
+            ctx.stroke()
+        }
+    }
+}
