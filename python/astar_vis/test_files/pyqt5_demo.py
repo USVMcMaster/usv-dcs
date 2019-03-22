@@ -41,7 +41,7 @@ class Settings():
     NUM_BLOCKS_Y = 14
 
 
-class QS(QtWidgets.QGraphicsScene):
+class QScene(QtWidgets.QGraphicsScene):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -83,7 +83,7 @@ class QS(QtWidgets.QGraphicsScene):
             line.setOpacity(opacity)
 
 
-class QV(QtWidgets.QGraphicsView):
+class QView(QtWidgets.QGraphicsView):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -136,9 +136,10 @@ class QV(QtWidgets.QGraphicsView):
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
-    a = QS()
-    b = QV()
-    b.setScene(a)
-    # b.resize(800,600)
-    b.show()
-    sys.exit(app.exec_())draw on grid
+    scene = QScene()
+    view = QView()
+    view.setScene(scene)
+    view.resize(800,600)
+    view.show()
+    sys.exit(app.exec_())
+    
