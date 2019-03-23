@@ -1,7 +1,6 @@
 import sys
-from PyQt5 import QtWidgets
-from PyQt5 import QtCore
-from PyQt5 import QtGui
+from PyQt5 import QtWidgets, QtGui, QtCore
+# from PyQt5 import QtCore
 from PyQt5.QtWidgets import QMenu
 from PyQt5.QtGui import QKeySequence, QCursor, QPen, QColor
 from PyQt5.QtCore import Qt
@@ -39,6 +38,8 @@ class Settings():
     HEIGHT = 15
     NUM_BLOCKS_X = 10
     NUM_BLOCKS_Y = 14
+    DISPLAY_WIDTH = 800
+    DISPLAY_HEIGHT = 600
 
 
 class QScene(QtWidgets.QGraphicsScene):
@@ -84,9 +85,12 @@ class QScene(QtWidgets.QGraphicsScene):
 
 
 class QView(QtWidgets.QGraphicsView):
+    clicked = QtCore.pyqtSignal()
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.setAcceptDrops(True)
+        self.dragstart = None
 
         self.view_menu = QMenu(self)
         self.create_actions()
@@ -115,31 +119,63 @@ class QView(QtWidgets.QGraphicsView):
 
         self.scale(1.0 / 1.5, 1.0 / 1.5)
 
+    # def toggleDrageMode(self):
+    #     if self.dragMode() == ScrollHandDrag:
+    #         self.setDragMode(NoDrag)
+    #     elif not self.
+
+    def mousePressEvent(self, event):
+        if event.buttons() and Qt.LeftButton:
+            print(event.pos())
+            self.dragstart = event.pos()
+            self.clicked.emit()
+
+    def mouseReleaseEvent(self, event):
+        self.dragstart = None
+
+    def mouseMoveEvent(self, event):
+        # if event.buttons() and Qt.LeftButton:
+        if event.buttons() == Qt.LeftButton and event.key() == Qt.Key_Control:
+            print(event.pos())
+            # painter.
+        # if (self.dragstart is not None and
+        #     event.buttons() & QtCore.Qt.LeftButton and
+        #     (event.pos() - self.dragstart).manhattanLength() >
+        #      QtWidgets.qApp.startDragDistance()):
+        #     self.dragstart = None
+        #     drag = QtGui.QDrag(self)
+        #     drag.setMimeData(QtCore.QMimeData())
+        #     drag.exec_(QtCore.Qt.LinkAction)
+
+    # def mouseMoveEvent(self, event):
+    #     if (self.dragstart is not None and
+    #         event.buttons() & Qt.LeftButton and)
+
     def drawBackground(self, painter, rect):
         gr = rect.toRect()
         start_x = gr.left() + Settings.WIDTH - (gr.left() % Settings.WIDTH)
         start_y = gr.top() + Settings.HEIGHT - (gr.top() % Settings.HEIGHT)
-        painter.save()
-        painter.setPen(QtGui.QColor(60, 70, 80).lighter(90))
-        painter.setOpacity(0.7)
+        # painter.save()
+        # painter.setPen(QtGui.QColor(60, 70, 80).lighter(90))
+        # painter.setOpacity(0.7)
 
-        for x in range(start_x, gr.right(), Settings.WIDTH):
-            painter.drawLine(x, gr.top(), x, gr.bottom())
+        # for x in range(start_x, gr.right(), Settings.WIDTH):
+        #     painter.drawLine(x, gr.top(), x, gr.bottom())
 
-        for y in range(start_y, gr.bottom(), Settings.HEIGHT):
-            painter.drawLine(gr.left(), y, gr.right(), y)
+        # for y in range(start_y, gr.bottom(), Settings.HEIGHT):
+        #     painter.drawLine(gr.left(), y, gr.right(), y)
 
-        painter.restore()
+        # painter.restore()
 
-        super().drawBackground(painter, rect)
+        # super().drawBackground(painter, rect)
 
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
     scene = QScene()
     view = QView()
+    view.setFixedSize(Settings.DISPLAY_WIDTH, Settings.DISPLAY_HEIGHT)
     view.setScene(scene)
-    view.resize(800,600)
     view.show()
     sys.exit(app.exec_())
     
