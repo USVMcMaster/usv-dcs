@@ -35,5 +35,6 @@ pip install opencv-python
 or
 
 conda install opencv
+test
 
 ```
