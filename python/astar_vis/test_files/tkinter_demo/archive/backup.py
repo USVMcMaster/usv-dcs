@@ -1,31 +1,63 @@
 import tkinter as tk
+from demo_settings import *
 
 class UI(tk.Tk):
 
     def __init__(self):
 
-        tk.Tk.__init__(self)
+        super().__init__()
+        
+        canvas = tk.Canvas(tk.TK, FRAME_WIDTH, FRAME_HEIGHT)
+        canvas.pack()
 
-        WIDTH = 800
-        HEIGHT = 600
-        POS_X = (self.winfo_screenwidth() - WIDTH)/2
-        POS_Y = (self.winfo_screenheight() - HEIGHT)/2
+        POS_X = (self.winfo_screenwidth() - FRAME_WIDTH)/2
+        POS_Y = (self.winfo_screenheight() - FRAME_HEIGHT)/2
 
-        self.geometry('%dx%d+%d+%d' % (WIDTH, HEIGHT, POS_X, POS_Y))
+        self.geometry('%dx%d+%d+%d' % (FRAME_WIDTH, FRAME_HEIGHT, POS_X, POS_Y))
         self.title('Interactive Astar Demo')
 
         self.bind('<Button-1>', self.click)
+
+        self.draw_grid()
+
+    def gen_grid(self):
+        grid = []
+        for row in range(10):
+            grid.append([])
+
+            for coloumn in range(10):
+                grid[row].append(0)
+
+        grid[1][5] = 1
+
+        for row in range(10):
+            for column in range(10):
+                colour = WHITE
+
+                if grid[row][column] == 1:
+                    color = GREEN
+
+                    canvas.create_rectangle((MARGIN + GRID_WIDTH) * column + MARGIN,
+                              (MARGIN + GRID_HEIGHT) * row + MARGIN,
+                              GRID_WIDTH,
+                              GRID_HEIGHT)
+
+
 
 
     def click(self, event):
         self.coords = event.x, event.y
         print(self.coords)
+
     def exit(self, event):
 
         if ord(event.char) == 27: #ESC char
             exit(0)
 
 if __name__ == "__main__":
+    
+
+
     UI().mainloop()
 
 
