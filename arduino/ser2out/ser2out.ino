@@ -1,14 +1,18 @@
 #include <Servo.h>
-Servo servo;
-byte servoPin = 9;
+Servo thruster1;
+Servo thruster2;
+byte t1Pin = 10;
+byte t2Pin = 9;
 
 void setup()
 {
   Serial.begin(9600);
-  servo.attach(servoPin);
+  thruster1.attach(t1Pin);
+  thruster2.attach(t2Pin);
 
-  servo.writeMicroseconds(1500); //1500 is the stop signal for the ESC
-  delay(5000); //Wait for ESC to recognize signal
+  thruster1.writeMicroseconds(1500); //1500 is the stop signal for the ESC
+  thruster2.writeMicroseconds(1500);
+  delay(2500); //Wait for ESC to recognize signal
 
   Serial.println("Ready");
 }
@@ -49,7 +53,8 @@ void loop()
 
       //Serial.print("Signal Value");
       Serial.println(signalValue);
-      servo.writeMicroseconds(signalValue); // Send signal to ESC.
+      thruster1.writeMicroseconds(signalValue); // Send signal to ESC.
+      thruster2.writeMicroseconds(signalValue);
     }    
   }
 }
