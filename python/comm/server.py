@@ -5,7 +5,7 @@ from inputs import get_gamepad
 
 
 HOST = 'localhost'      # 127.0.0.1
-PORT = 5000             # Arbritary port > 1024
+PORT = 5005             # Arbritary port > 1024
 
 
 with socket(AF_INET, SOCK_STREAM) as s:     # Auto close socket, no need to use s.close
