@@ -58,7 +58,7 @@ def forward_data():
             for event in events:
                 if event.state != 0:
                                         
-                    if event.code == "ABS_RZ": # Forward direction
+                    if event.code == "ABS_RZ": #ls Forward direction
                         forward_requested = True
                         right_trig = get_trigger_val(event.state, deadband, trigger_max)
 
