@@ -14,7 +14,7 @@ export class AppComponent {
   locationChosen = false;
 
   onChosenLocation(event) {
-  	// console.log(event)
+  	console.log(event)
   	this.lat = event.coords.lat;
   	this.lng = event.coords.lng;
   	this.locationChosen = true;
