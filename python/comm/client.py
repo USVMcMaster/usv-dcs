@@ -9,8 +9,11 @@ with socket(AF_INET, SOCK_STREAM) as s:
         while True:            
             data = s.recv(4096)        
 
-            if data == b"stop_client":
+            if data == b"('Key', 'BTN_MODE', 1)":
+                s.send(b'kill_server')
                 break
+            else:
+                s.send(b'working')
 
             print(data)
     except KeyboardInterrupt:
