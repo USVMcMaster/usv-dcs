@@ -23,6 +23,10 @@ with socket(AF_INET, SOCK_STREAM) as s:     # Auto close socket, no need to use 
             while True:
                 data = ci.get_inputs()
                 conn.send(bytes(str(data), encoding='utf8'))
+
+                status = conn.recv(1024)
+                # if status == b"('Key', 'BTN_MODE', 1)":
+                #     break
         except KeyboardInterrupt:
             print("\nexiting")
         # conn.send(b"test")
