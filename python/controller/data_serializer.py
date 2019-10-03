@@ -1,5 +1,5 @@
 import serial
-def create_serial(port, baudrate)
+def create_serial(port, baudrate):
     return serial.Serial(port, baudrate)
 
 
