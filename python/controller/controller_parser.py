@@ -9,9 +9,7 @@ from inputs import get_gamepad
 
 joystick_events = ['ABS_Y', 'ABS_RY']
 trigger_events = ['ABS_Z', 'ABS_RZ']
-button_events = ['BTN_TL', 'BTN_TR']
-
-exit_event = 'BTN_MODE'
+button_events = ['BTN_TL', 'BTN_TR', 'BTN_MODE']
 
 joy_rest_value = 128
 joy_neg_limit = -32767
@@ -43,15 +41,12 @@ def get_data():
     for event in events:
 
         if event.code in joystick_events:
-            return(event.code, get_joy_val(event.state*-1, joy_rest_value, joy_neg_limit, joy_pos_limit))
+            return event.code, get_joy_val(event.state*-1, joy_rest_value, joy_neg_limit, joy_pos_limit)
 
         elif event.code in trigger_events:
-            return (event.code, get_trig_val(event.state, trigger_deadband, trigger_limit))
+            return event.code, get_trig_val(event.state, trigger_deadband, trigger_limit)
 
         elif event.code in button_events:
-            return (event.code, event.state)
-
-        elif event.code == 'BTN_MODE':
             return event.code, event.state
 
 if __name__ == "__main__":

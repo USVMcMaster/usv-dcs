@@ -1,9 +1,11 @@
 from socket import socket, AF_INET, SOCK_STREAM, SOL_SOCKET, SO_REUSEADDR
 import controller.controller_parser as cp 
+import time
 
 # Use SOCK_STREAM for TCP
 # Use SOCK_DGRAM for UDP
 
+# socket config
 HOST = '0.0.0.0'        # Accept all ip
 PORT = 5005             # Arbritary port > 1024
 
@@ -25,12 +27,16 @@ with socket(AF_INET, SOCK_STREAM) as s:     # Auto close socket, no need to use 
                 if data is not None:
                     print(data)
                     conn.send(bytes(str(data), encoding='utf8'))
+                
                 else:
                     continue
+
                 status = conn.recv(1024)
                 if status == b'kill_server':
                     print("stopping server")
                     break
+
+                time.sleep(0.015)
         except KeyboardInterrupt:
             print("\nexiting")
         # conn.send(b"test")
