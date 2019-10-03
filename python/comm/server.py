@@ -1,11 +1,10 @@
 from socket import socket, AF_INET, SOCK_STREAM, SOL_SOCKET, SO_REUSEADDR
-import controller.controller_input as ci            # use for full rollout
-from inputs import get_gamepad
+import controller.controller_parser as cp 
 
 # Use SOCK_STREAM for TCP
 # Use SOCK_DGRAM for UDP
 
-HOST = 'localhost'      # Accept all ip
+HOST = '0.0.0.0'        # Accept all ip
 PORT = 5005             # Arbritary port > 1024
 
 with socket(AF_INET, SOCK_STREAM) as s:     # Auto close socket, no need to use s.close
@@ -21,19 +20,24 @@ with socket(AF_INET, SOCK_STREAM) as s:     # Auto close socket, no need to use 
 
         try:
             while True:
-                data = ci.get_inputs()
-                conn.send(bytes(str(data), encoding='utf8'))
-
+                data = cp.get_data()
+                
+                if data is not None:
+                    print(data)
+                    conn.send(bytes(str(data), encoding='utf8'))
+                else:
+                    continue
                 status = conn.recv(1024)
-                # if status == b"('Key', 'BTN_MODE', 1)":
-                #     break
+                if status == b'kill_server':
+                    print("stopping server")
+                    break
         except KeyboardInterrupt:
             print("\nexiting")
         # conn.send(b"test")
         # print("sent")
 
         # while True:
-        #     # ci.get_inputs()
+        #     # ci.get_data()
         #     data = conn.recv(1024)
         #     if not data:
         #         break
