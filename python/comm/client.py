@@ -2,7 +2,8 @@ from socket import socket, AF_INET, SOCK_STREAM
 import controller.data_serializer as ds
 
 # Socket config
-HOST = '172.17.42.153'  # The server's hostname or IP address; post deployment, use laptop ip
+HOST = '192.168.100.180'
+# HOST = '172.17.42.153'  # The server's hostname or IP address; post deployment, use laptop ip
 PORT = 5005             # The port used by the server
 
 # Serial config
@@ -27,8 +28,8 @@ with socket(AF_INET, SOCK_STREAM) as s:
             print(data)
             decoded_data = data.decode('utf-8').strip("()")
             event, state = decoded_data.split(',') 
-            print(type(decoded_data), event, state)
-            ds.forward_state(ser, event, state)
+            # print(type(decoded_data), event, state)
+            ds.forward_state(ser, event.replace("'", ""), state)
 
     except KeyboardInterrupt:
         print("\nexiting")
