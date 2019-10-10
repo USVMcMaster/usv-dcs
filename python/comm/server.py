@@ -36,7 +36,7 @@ with socket(AF_INET, SOCK_STREAM) as s:     # Auto close socket, no need to use 
                     print("stopping server")
                     break
 
-                time.sleep(0.015)
+                # time.sleep(0.020)
         except KeyboardInterrupt:
             print("\nexiting")
         # conn.send(b"test")
