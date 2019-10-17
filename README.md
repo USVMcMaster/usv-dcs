@@ -41,38 +41,14 @@ After pressing enter you will see a key randomart image. At this point, your key
 
 sudo apt-get install openssh-server
 
-**6. Give Rohit your id_rsa.pub key file** <br />
+**6. Give admin your id_rsa.pub key file** <br />
 Navigate to your home directory from the file explorer. If you do not see any files that have a "." in front of them, press ctrl+h to view hidden files. You should see a .ssh folder. Open that folder and find your "id_rsa.pub" file. Send this file to Rohit. Wait for Rohit to add your key to the repo. Without this, you will not be able to use the remote repo. 
 
-**DO NOT CONTINUE UNTIL ROHIT GIVES YOU THE GO-AHEAD**
+**Wait until you're added as a collaborator!**
 
-**7. Create directory for remote repo.** <br />
+**7. Create directory for the repo.** <br />
 cd ~ <br />
 mkdir usvmac <br />
 cd ./usvmac <br />
 git init <br />
 git remote add origin git@github.com:USVMcMaster/usvmac.git <br />
-
-**Note**: When you add origin, you will not get a confirmation message or anything. You can type git status afterward to check if its working. <br />
-You will see the following message: <br />
-*On branch master* <br />
-
-*No commits yet* <br />
-
-*nothing to commit (create/copy files and use "git add" to track")* <br />
-
-**8. Make your own personal branch and clone master** <br />
-git checkout -b "name of your new branch" <br />
-git pull origin master <br />
-
-**9. Make test file** <br />
-touch "yourname.txt" <br />
-git add "yourname.txt" <br />
-git commit "yourname.txt" <br />
-
-**Note**: After writing the commit line and pressing enter, it will open a nano file in terminal. Write your commit comment here (can be anything, keep it professional). Press ctrl+x and then y and then enter. This will save the commit message.
-
-**10. Push to YOUR branch** <br />
-git push origin "name of your new branch" <br />
-
-Congrats, you have done your first push to github.
