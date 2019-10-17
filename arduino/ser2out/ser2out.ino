@@ -1,20 +1,20 @@
-//#include <Servo.h>
-//Servo thruster1;
-//Servo thruster2;
-//byte t1Pin = 10;
-//byte t2Pin = 9;
+#include <Servo.h>
+Servo thruster1;
+Servo thruster2;
+byte t1Pin = 10;
+byte t2Pin = 9;
 
 void setup()
 {
   Serial.begin(9600);
 
 //  Temporarily disabled since motors are not connected
-//  thruster1.attach(t1Pin);
-//  thruster2.attach(t2Pin);
-//
-//  thruster1.writeMicroseconds(1500); //1500 is the stop signal for the ESC
-//  thruster2.writeMicroseconds(1500);
-//  delay(2500); //Wait for ESC to recognize signal
+  thruster1.attach(t1Pin);
+  thruster2.attach(t2Pin);
+
+  thruster1.writeMicroseconds(1500); //1500 is the stop signal for the ESC
+  thruster2.writeMicroseconds(1500);
+  delay(2500); //Wait for ESC to recognize signal
 
   Serial.println("Ready");
 }
@@ -24,7 +24,7 @@ void loop()
   String data;
 
   int eventIndex;
-  String event;
+  String event;                                                       
 
   float state;
   int signalValue;
@@ -54,13 +54,13 @@ void loop()
 //      Please forgive me.
       if (event == t1_code)
       {
-//        thruster1.writeMicroseconds(signalValue);
+        thruster1.writeMicroseconds(signalValue);
         t1_output = signalValue;
       }
 
       else if (event == t2_code)
       {
-//        thruster2.writeMicroseconds(signalValue);
+        thruster2.writeMicroseconds(signalValue);
         t2_output = signalValue;
       }
 
