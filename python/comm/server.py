@@ -39,13 +39,3 @@ with socket(AF_INET, SOCK_STREAM) as s:     # Auto close socket, no need to use 
                 # time.sleep(0.020)
         except KeyboardInterrupt:
             print("\nexiting")
-        # conn.send(b"test")
-        # print("sent")
-
-        # while True:
-        #     # ci.get_data()
-        #     data = conn.recv(1024)
-        #     if not data:
-        #         break
-            # conn.sendall(data)
-
