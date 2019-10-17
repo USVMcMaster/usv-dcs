@@ -1,42 +1,41 @@
 import serial
 import pynmea2 as nmea
-import time
-import pdb
 
 def create_ser(port, baud_rate):
     ser = serial.Serial(port, baud_rate)
     return ser
 
-def filter_data(ser):
+def serial_nmea_parser(ser, verbose = False):
 
     gps_data = ser.readline()
-    print("raw data:", gps_data)
-    # # gps_data = gps_data.decode("utf-8")
-    # # print("gps_data:", gps_data)
 
+    if b'$GPGGA' in gps_data[0:6]:
+        parsed_data = nmea.parse(gps_data.decode('utf-8'))
 
-    # print("data: ", gps_data.decode("utf-8"))
-    # # pdb.set_trace()
+        if verbose:
+            show_output(parsed_data)
 
-    parsed_gps_data = ''
-    if gps_data.find(b'$GPGGA', 0, 8):
-        print("valid data found")
-        # parsed_gps_data = nmea.parse(gps_data)
-        parsed_gps_data = gps_data
-        print(parsed_gps_data)
-    else:
-        print("no valid data, trying again")
-        filter_data(ser)
-    return parsed_gps_data
+        return parsed_data
+
+def show_output(data):
+    # Numeric representation
+    print("lat:", data.lat, data.lat_dir,
+          "lon:", data.lon, data.lon_dir)
+
+    # NMEA format
+    print("\nlatitude:", '%02d°%02d′%07.4f″' % (data.latitude,
+                                              data.latitude_minutes,
+                                              data.latitude_seconds))
+
+    print("longitude:", '%02d°%02d′%07.4f″\n' % (data.longitude,
+                                               data.longitude_minutes,
+                                               data.longitude_seconds))
+
 
 if __name__ == "__main__":
     ser = create_ser('/dev/ttyUSB0', 4800)
-    # ser.open()
     try:
-        # while True:
-        print(filter_data(ser))
-        time.sleep(0.25)
-        ser.close()
+        while True:
+            data = serial_nmea_parser(ser, True)
     except KeyboardInterrupt:
-        print("exiting")
-        ser.close()
+        print('stopping')
