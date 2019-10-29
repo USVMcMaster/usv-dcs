@@ -1,0 +1,8 @@
+Awesome guide: https://www.youtube.com/watch?v=ksW59gYEl6Q
+
+pyuic5 <-- converts pyqt5 designer .ui code to python code
+
+Dependancies:
+pip3 install PyQt5
+sudo apt install qttools5-dev-tools
+sudo apt install pyqt5-dev-tools
