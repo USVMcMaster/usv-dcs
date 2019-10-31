@@ -1,5 +1,13 @@
 import { Component } from '@angular/core';
 
+// export code for grid list
+export interface Tile {
+  color: string;
+  cols: number;
+  rows: number;
+  text: string;
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -15,10 +23,15 @@ export class AppComponent {
 
   locationChosen = false;
 
+  tiles: Tile[] = [
+    {text: 'Camera feed goes here!', cols: 2, rows: 1, color: 'lightblue'},
+    {text: 'Google Maps', cols: 1, rows: 1, color: 'lightgreen'},
+  ];
+
   onChosenLocation(event) {
-  	console.log(event)
-  	this.lat = event.coords.lat;
-  	this.lng = event.coords.lng;
-  	this.locationChosen = true;
+    console.log(event)
+    this.lat = event.coords.lat;
+    this.lng = event.coords.lng;
+    this.locationChosen = true;
   }
 }

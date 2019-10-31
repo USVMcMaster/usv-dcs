@@ -1,9 +1,24 @@
-<agm-map [latitude]="lat" [longitude]="lng" (mapClick)="onChosenLocation($event)">
-  <agm-marker 
+<mat-grid-list cols="3" rowHeight="500px">
+
+  <mat-grid-tile [colspan]="2" [style.background]="lightblue">
+    <mat-card class="camera-card">
+      <mat-card-title>Camera Feed</mat-card-title>
+    </mat-card>
+  </mat-grid-tile>
+
+
+  <mat-grid-tile [colspan]="1" >
+    <mat-card class="map-card">
+      <agm-map [latitude]="lat" [longitude]="lng" (mapClick)="onChosenLocation($event)">
+        <agm-marker 
+
+        [latitude]="lat" 
+        [longitude]="lng"
+        *ngIf="locationChosen">
+
+        </agm-marker>
+      </agm-map>
+    </mat-card>
+  </mat-grid-tile>
   
-  [latitude]="lat" 
-  [longitude]="lng"
-  *ngIf="locationChosen">
-    
-  </agm-marker>
-</agm-map>
+</mat-grid-list>
