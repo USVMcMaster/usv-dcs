@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AgmCoreModule } from '@agm/core';
 
 import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { AppComponent } from './app.component';
     BrowserModule,
     AgmCoreModule.forRoot({
     	apiKey: 'AIzaSyDdjnJdmnyoNX2btE-w8MHDdeTPhQgb6cs'
-    })
+    }),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
