@@ -8,6 +8,8 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'usv-ui';
   
+
+  // TODO: Center on GPS coord on start rather than fixed location
   lat = 45.4122448;
   lng = -75.7107264;
 
