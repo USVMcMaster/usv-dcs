@@ -2,6 +2,7 @@ import pyrealsense2 as rs
 import numpy as np
 import cv2
 import time
+import sys
 # # Creating pipe for obtaining data from rs camera
 pipeline = rs.pipeline()
 config = rs.config()
@@ -11,8 +12,6 @@ config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 30)
 
 # Start Stream
 pipeline.start(config)
-
-
 
 try:
     while True:
@@ -35,11 +34,18 @@ try:
         images = np.hstack((color_image, depth_colormap))
 
         # Show images
-        # cv2.namedWindow('RealSense', cv2.WINDOW_AUTOSIZE)
-        # cv2.imshow('RealSense', images)
-        # cv2.waitKey(1)
-        print(images)
-except KeyboardInterrupt:
+        cv2.namedWindow('RealSense', cv2.WINDOW_AUTOSIZE)
+        cv2.imshow('RealSense', images)
+
+        # Hold frame until keypress
+        if cv2.waitKey(0) & 0xFF == ord('q'):
+            break
+
+        # Display frame for 1ms
+        # if cv2.waitKey(1) & 0xFF == ord('q'):
+        #     break
+
+        print(sys.getsizeof(images))
+        
+finally:
     pipeline.stop()
-# finally:
-#     pipeline.stop()
