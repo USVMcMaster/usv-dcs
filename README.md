@@ -1,17 +1,10 @@
 **Welcome to the Unmanned Surface Vehicle - Automation Capstone Repo!**
 
-The following document assumes you have a fresh install of Ubuntu 18.04. Also, by this point, you should have git account and have access to the git repo. If you have any pending updates from Ubuntu, please do them before going through this guide.
-
-**Notes:**
-All commands will be done through terminal.
-When using sudo, you may be asked to enter your password. Terminal does not show the characters you type in for your password. Enter your password whem prompted.
-If when installing any of the following instructions show up, follow all instructions.
-
 **1. Obtain pip for python3** <br />
 sudo apt install python3-pip <br />
 
-**2. Obtain numpy, scipy, matplotlib, jupyter** <br />
-pip3 install numpy scipy matplotlib jupyter <br />
+**2. Obtain python dependancies** <br />
+pip3 install numpy pyserial inputs <br />
 
 **3. Installing git** <br />
 sudo apt-get update <br />
@@ -37,16 +30,14 @@ Press enter. <br />
 
 After pressing enter you will see a key randomart image. At this point, your key has been created. <br />
 
-**Note**: If ssh doesn't work, you probably don't have it installed. Run the following in terminal and then generate your key file using the code above.
+**6. Add your id_rsa.pub key file to your git account** <br />
+Settings >> SSH and GPG keys >> New SSH key
 
-sudo apt-get install openssh-server
-
-**6. Give admin your id_rsa.pub key file** <br />
-Navigate to your home directory from the file explorer. If you do not see any files that have a "." in front of them, press ctrl+h to view hidden files. You should see a .ssh folder. Open that folder and find your "id_rsa.pub" file. Send this file to Rohit. Wait for Rohit to add your key to the repo. Without this, you will not be able to use the remote repo. 
+**7. Request collaborator status from admin** <br />
 
 **Wait until you're added as a collaborator!**
 
-**7. Create directory for the repo.** <br />
+**8. Create directory for the repo.** <br />
 cd ~ <br />
 mkdir usvmac <br />
 cd ./usvmac <br />
