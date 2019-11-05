@@ -20,8 +20,6 @@ if __name__ == "__main__":
     subscriber = pubsub_v1.SubscriberClient()
     subscription_path = subscriber.subscription_path(project_id, subscription_name)
 
-
-
     future = subscriber.subscribe(subscription_path, callback)
 
     try:
