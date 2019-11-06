@@ -9,8 +9,15 @@
 
   <mat-grid-tile [colspan]="1" >
     <mat-card class="map-card">
-      <agm-map [latitude]="lat" [longitude]="lng" (mapClick)="onChosenLocation($event)">
-        <agm-marker 
+      <agm-map
+
+      [latitude]="init_lat"
+      [longitude]="init_lng"
+      [zoom]="init_zoom"
+
+      (mapClick)="onChosenLocation($event)">
+
+        <agm-marker
 
         [latitude]="lat"
         [longitude]="lng"
@@ -18,7 +25,8 @@
 
         </agm-marker>
       </agm-map>
-      <button mat-raised-button color="primary">Generate Path</button>
+
+      <button mat-raised-button color="primary" (click)="gen_path_handler($event)">Generate Path</button>
     </mat-card>
   </mat-grid-tile>
   

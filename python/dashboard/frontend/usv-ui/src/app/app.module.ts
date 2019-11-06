@@ -17,6 +17,7 @@ import { MatCardModule, MatGridListModule, MatButtonModule } from '@angular/mate
     AgmCoreModule.forRoot({
     	apiKey: 'AIzaSyDdjnJdmnyoNX2btE-w8MHDdeTPhQgb6cs'
     }),
+    
     MatCardModule,
     MatGridListModule,
     MatButtonModule,

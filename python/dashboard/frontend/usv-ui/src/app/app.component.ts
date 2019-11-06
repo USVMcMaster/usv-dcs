@@ -17,8 +17,12 @@ export class AppComponent {
   title = 'usv-ui';
   
   // TODO: Center on GPS coord on start rather than fixed location
-  lat = 43.266951;
-  lng = -79.921734;
+  init_lat = 43.266951;
+  init_lng = -79.921734;
+  init_zoom = 15;
+
+  lat = 0.0;
+  lng = 0.0;
 
   locationChosen = false;
 
@@ -32,5 +36,10 @@ export class AppComponent {
     this.lat = event.coords.lat;
     this.lng = event.coords.lng;
     this.locationChosen = true;
+  }
+
+  gen_path_handler(event) {
+    console.log(this.init_lat, this.init_lng, this.init_zoom, event)
+    
   }
 }
