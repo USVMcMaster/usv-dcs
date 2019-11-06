@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 
-// export code for grid list
-export interface Tile {
-  color: string;
-  cols: number;
-  rows: number;
-  text: string;
-}
+// // export code for grid list
+// export interface Tile {
+//   color: string;
+//   cols: number;
+//   rows: number;
+//   text: string;
+// }
 
 @Component({
   selector: 'app-root',
@@ -16,17 +16,16 @@ export interface Tile {
 export class AppComponent {
   title = 'usv-ui';
   
-
   // TODO: Center on GPS coord on start rather than fixed location
-  lat = 45.4122448;
-  lng = -75.7107264;
+  lat = 43.266951;
+  lng = -79.921734;
 
   locationChosen = false;
 
-  tiles: Tile[] = [
-    {text: 'Camera feed goes here!', cols: 2, rows: 1, color: 'lightblue'},
-    {text: 'Google Maps', cols: 1, rows: 1, color: 'lightgreen'},
-  ];
+  // tiles: Tile[] = [
+  //   {text: 'Camera feed goes here!', cols: 2, rows: 1, color: 'lightblue'},
+  //   {text: 'Google Maps', cols: 1, rows: 1, color: 'lightgreen'},
+  // ];
 
   onChosenLocation(event) {
     console.log(event)

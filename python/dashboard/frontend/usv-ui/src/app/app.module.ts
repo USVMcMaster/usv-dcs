@@ -5,7 +5,7 @@ import { AgmCoreModule } from '@agm/core';
 
 import { AppComponent } from './app.component';
 
-import { MatCardModule, MatGridListModule } from '@angular/material';
+import { MatCardModule, MatGridListModule, MatButtonModule } from '@angular/material';
 // import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -19,6 +19,7 @@ import { MatCardModule, MatGridListModule } from '@angular/material';
     }),
     MatCardModule,
     MatGridListModule,
+    MatButtonModule,
     // BrowserAnimationsModule
   ],
   providers: [],
