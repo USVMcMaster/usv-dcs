@@ -1,13 +1,5 @@
 import { Component } from '@angular/core';
 
-// // export code for grid list
-// export interface Tile {
-//   color: string;
-//   cols: number;
-//   rows: number;
-//   text: string;
-// }
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -21,25 +13,48 @@ export class AppComponent {
   init_lng = -79.921734;
   init_zoom = 15;
 
-  lat = 0.0;
-  lng = 0.0;
+  marker_lat = 0.0;
+  marker_lng = 0.0;
 
   locationChosen = false;
 
-  // tiles: Tile[] = [
-  //   {text: 'Camera feed goes here!', cols: 2, rows: 1, color: 'lightblue'},
-  //   {text: 'Google Maps', cols: 1, rows: 1, color: 'lightgreen'},
-  // ];
-
   onChosenLocation(event) {
     console.log(event)
-    this.lat = event.coords.lat;
-    this.lng = event.coords.lng;
+    this.marker_lat = event.coords.lat;
+    this.marker_lng = event.coords.lng;
     this.locationChosen = true;
+  }
+
+  gen_map_snapshot() {
+    var static_map_url = "https://maps.googleapis.com/maps/api/staticmap?";
+
+    // Map Center
+    static_map_url += "center=" + this.init_lat + "," + this.init_lng;
+
+    // Map Zoom Level
+    static_map_url += "&zoom=" + this.init_zoom;
+
+    // Map Size
+    static_map_url += "&size=" + "480x480";
+
+    // Map Marker
+    static_map_url += "&markers=" + this.marker_lat + "," + this.marker_lng;
+
+    // Remove all text
+    static_map_url += "&style=" + "feature:all|element:labels|visibility:off";
+
+    // Remove Roads
+    static_map_url += "&style=" + "feature:road|visibility:off";
+
+    // Appending Key
+    static_map_url += "&key=" + 'AIzaSyDdjnJdmnyoNX2btE-w8MHDdeTPhQgb6cs';
+
+    return static_map_url;
+
   }
 
   gen_path_handler(event) {
     console.log(this.init_lat, this.init_lng, this.init_zoom, event)
-    
+    console.log(this.gen_map_snapshot())
   }
 }
