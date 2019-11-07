@@ -21,6 +21,7 @@ import { MatCardModule, MatGridListModule, MatButtonModule } from '@angular/mate
     MatButtonModule,
     // BrowserAnimationsModule
   ],
+  exports: [NgOpenCVModule],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -13,8 +13,9 @@ export class AppComponent {
   init_lng = -79.921734;
   init_zoom = 15;
 
-  marker_lat = 0.0;
-  marker_lng = 0.0;
+  marker_lat;
+  marker_lng;
+  map_url;
 
   locationChosen = false;
 
@@ -56,5 +57,6 @@ export class AppComponent {
   gen_path_handler(event) {
     console.log(this.init_lat, this.init_lng, this.init_zoom, event)
     console.log(this.gen_map_snapshot())
+    this.map_url = this.gen_map_snapshot()
   }
 }
