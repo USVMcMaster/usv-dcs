@@ -3,7 +3,7 @@ import { NgOpenCVService, OpenCVLoadResult } from 'ng-open-cv';
 import { switchMap } from 'rxjs/operators';
 import { Observable, fromEvent } from 'rxjs';
 
-// import { ImageService } from './image.service';
+import { ImageService } from './image.service';
 
 @Component({
   selector: 'app-root',
@@ -11,26 +11,27 @@ import { Observable, fromEvent } from 'rxjs';
   styleUrls: ['./app.component.css']
 })
 
-// export class AppComponent implements OnInit {
-export class AppComponent {
+export class AppComponent implements OnInit {
+// export class AppComponent {
   // title = 'usv-ui';
 
-  // // Keep tracks of the ready
-  // openCVLoadResult: Observable<OpenCVLoadResult>;
+  // Keep tracks of the ready
+  openCVLoadResult: Observable<OpenCVLoadResult>;
 
-  // // HTML Element references
-  // @ViewChild('fileInput', {static:false})
-  // fileInput: ElementRef;
+  // HTML Element references
+  @ViewChild('fileInput', {static:false})
+  fileInput: ElementRef;
   // @ViewChild('canvasInput', {static:false})
   // canvasInput: ElementRef;
-  // @ViewChild('canvasOutput', {static:false})
-  // canvasOutput: ElementRef;
+  @ViewChild('canvasOutput', {static:false})
+  canvasOutput: ElementRef;
 
+  constructor(private ngOpenCVService: NgOpenCVService) { }
   // constructor(private ngOpenCVService: NgOpenCVService, private imageService: ImageService) { }
   // // constructor(private imageService: ImageService) { }
-  // ngOnInit() {
-  //   this.openCVLoadResult = this.ngOpenCVService.isReady$;
-  // }
+  ngOnInit() {
+    this.openCVLoadResult = this.ngOpenCVService.isReady$;
+  }
   
   // TODO: Center on GPS coord on start rather than fixed location
   init_lat = 43.266951;
@@ -108,6 +109,9 @@ export class AppComponent {
     // console.log(this.gen_map_snapshot())
     this.map_url = this.gen_map_snapshot()
     console.log(this.map_url)
+
+    let src = cv.imread('map_image');
+    console.log(src);
 
     // this.getImageFromService()
   }
