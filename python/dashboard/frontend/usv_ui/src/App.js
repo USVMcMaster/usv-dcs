@@ -1,27 +1,47 @@
-import React, { useEffect, useState } from 'react';
+import React, { Component } from 'react';
+// import {  } from '@material-ui/core';
 import './App.css';
-import { Data } from './components/Data';
 
-function App() {
-  // const [stuff, myData] = useState([]);
+class App extends Component {
+  
+  componentDidMount() {
+    this.renderMap()
+  }
+  
+  initMap = () => {
+    // eslint-disable-next-line
+      var map = new window.google.maps.Map(document.getElementById('map'), {
+        center: {lat: 43.266951, lng: -79.921734},
+        zoom: 15
+      });
+    }
+    
+  renderMap = () => {
+    loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyDdjnJdmnyoNX2btE-w8MHDdeTPhQgb6cs&callback=initMap")
+    window.initMap = this.initMap
+  }
+   
+  render() {
+    return (
+      <main>
+        <div id="map"></div>
+      </main>
+    );
+  } 
+}
 
-  useEffect(() => {
-    fetch('/test_data').then(response =>
-       response.json().then(data => {
-         console.log(data);
-        //  myData(data.stuff);
-        })
-      );
-    // Empty array forces component to only run on first load
-  }, [])
+function loadScript(url) {
+  // First element of all elements with tag name script
+  var index = window.document.getElementsByTagName("script")[0] 
+  var script = window.document.createElement("script")
+  
+  script.src = url
+  script.async = true
+  script.defer = true
 
-  // console.log(stuff);
-  return (
-    <div className="App">
-      {/* <Data  stuff={stuff}/> */}
-
-    </div>
-  );
+  // Ensures child is appended to parent
+  // newNode -> script | referenceNode -> index
+  index.parentNode.insertBefore(script, index)
 }
 
 export default App;
