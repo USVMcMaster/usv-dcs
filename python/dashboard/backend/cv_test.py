@@ -18,7 +18,7 @@ def mask_image():
 
     # # mask = cv2.resize(mask,(100,100))
 
-    return mask, res
+    return image, mask, res
 
 def image_to_mesh(image):
 
@@ -33,12 +33,12 @@ def image_to_mesh(image):
 
     return pkl, mesh_image
 
-image, res = mask_image()
+image, mask, res = mask_image()
 
-if len(image.shape) > 2:
-    image = image[:, :, 0]
+if len(mask.shape) > 2:
+    mask = mask[:, :, 0]
 
-pkl, mesh_image = image_to_mesh(image)
+pkl, mesh_image = image_to_mesh(mask)
 
 true_src = (632, 6)
 true_dst = (197, 286)
@@ -53,13 +53,13 @@ for pt_pair in path:
     formatted_pt_pair[0] = formatted_pt_pair[0][::-1]
     formatted_pt_pair[1] = formatted_pt_pair[1][::-1]
 
-    cv2.line(res, tuple(formatted_pt_pair[0]), tuple(formatted_pt_pair[1]), (127,132,241), 5)
-    # for pt in pt_pair:
-    #     pt = pt[::-1] <-- true points list (check order to confirm)
-    #     res = cv2.circle(res, pt, 1, [123,241,122],5)
+    cv2.line(image, tuple(formatted_pt_pair[0]), tuple(formatted_pt_pair[1]), (90,139,255), 5)
+    for pt in pt_pair:
+        pt = pt[::-1] # <-- true points list (check order to confirm)
+        image = cv2.circle(image, pt, 2, (255,145,147),2,8,0)
 
-cv2.circle(res, true_src,2,(0,255,0),2,8,0)
-cv2.circle(res, true_dst,2,(0,0,255),2,8,0)
+cv2.circle(image, true_src,2,(0,255,0),2,8,0)
+cv2.circle(image, true_dst,2,(0,0,255),2,8,0)
 
-cv2.imshow("path", res)
+cv2.imshow("path", image)
 cv2.waitKey(0)
