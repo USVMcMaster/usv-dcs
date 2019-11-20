@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles(theme => ({
+    // root == container level
     root: {
         flexGrow: 1,
         padding: 20,
@@ -14,12 +15,17 @@ const useStyles = makeStyles(theme => ({
         
         
       },
-    //   paper: {
-    //     height: 100,
-    //     width: 100,
-    //   },
-      control: {
+      // control == item level
+      itembox: {
+        // height: 100,
+        // width: 100,
+        margin: 20
+      },
+
+      paper: {
         padding: theme.spacing(2),
+        height: 400,
+        width: 350
       },
   }));
 
@@ -27,18 +33,18 @@ export default function PaperSheet() {
     const classes = useStyles();
     
     return (
-        <Grid container className={classes.root} spacing={2}>
-            <Grid item sm>
-                <Paper className={classes.control}>
-                    <Typography variant="h4">
-                        Hopefully there will be a camera feed here someday!
-                    </Typography>
+        <Grid container className={classes.root}>
+            <Grid item className={classes.itembox}>
+                <Paper className={classes.paper}>
+                    <div id="map"></div>
                 </Paper>
             </Grid>
 
-            <Grid item sm>
-                <Paper className={classes.control}>
-                    <div id="map"></div>
+            <Grid item className={classes.itembox}>
+                <Paper className={classes.paper}>
+                    <Typography variant="h4">
+                        Coordinates go here!
+                    </Typography>
                 </Paper>
             </Grid>
         </Grid>

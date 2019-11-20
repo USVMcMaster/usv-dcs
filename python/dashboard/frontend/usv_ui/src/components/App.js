@@ -46,6 +46,7 @@ class App extends Component {
     return (
       <main>
         <ButtonAppBar/>
+        {/* <div id="map"></div> */}
         <PaperSheet></PaperSheet>
       </main>
     );

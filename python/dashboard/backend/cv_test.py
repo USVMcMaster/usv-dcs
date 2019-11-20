@@ -53,10 +53,11 @@ for pt_pair in path:
     formatted_pt_pair[0] = formatted_pt_pair[0][::-1]
     formatted_pt_pair[1] = formatted_pt_pair[1][::-1]
 
-    cv2.line(image, tuple(formatted_pt_pair[0]), tuple(formatted_pt_pair[1]), (90,139,255), 5)
+    cv2.line(image, tuple(formatted_pt_pair[0]), tuple(formatted_pt_pair[1]), (90,139,255), 1)
     for pt in pt_pair:
         pt = pt[::-1] # <-- true points list (check order to confirm)
-        image = cv2.circle(image, pt, 2, (255,145,147),2,8,0)
+        print(pt)
+        image = cv2.circle(image, pt, 2, (255,145,147),1,8,0)
 
 cv2.circle(image, true_src,2,(0,255,0),2,8,0)
 cv2.circle(image, true_dst,2,(0,0,255),2,8,0)
