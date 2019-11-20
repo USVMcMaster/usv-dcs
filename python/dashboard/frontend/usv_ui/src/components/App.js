@@ -11,28 +11,37 @@ class App extends Component {
   }
   
   initMap = () => {
+    var marker_count = 0;
+    var markers = [];
+
     // eslint-disable-next-line
     var map = new window.google.maps.Map(document.getElementById('map'), {
       center: {lat: 43.266951, lng: -79.921734},
       zoom: 15
     });
+
+    function addMarker (latLng, map) {
+      // eslint-disable-next-line
+      markers[marker_count] = new window.google.maps.Marker({
+      position: {lat: latLng.lat(), lng:latLng.lng()},
+      map: map
+      });
+
+      marker_count++
+    }
     
-    // eslint-disable-next-line
-    var marker = new window.google.maps.Marker({
-      position: {lat: 43.266951, lng: -79.921734},
-      map: map,
-      draggable: true,
-      title: 'Hello World!'
+    window.google.maps.event.addListener(map, 'click', function(event) {
+      // console.log(event.latLng.lat())
+      // console.log(event.latLng.lng())
+      addMarker(event.latLng, map) //<-- adds new marker per function call
     });
   }
 
-    
-  
   renderMap = () => {
     loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyDdjnJdmnyoNX2btE-w8MHDdeTPhQgb6cs&callback=initMap")
     window.initMap = this.initMap
   }
-   
+  
   render() {
     return (
       <main>
@@ -42,6 +51,7 @@ class App extends Component {
     );
   } 
 }
+
 
 function loadScript(url) {
   // First element of all elements with tag name script
