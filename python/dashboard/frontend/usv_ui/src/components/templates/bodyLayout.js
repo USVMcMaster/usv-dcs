@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(theme => ({
     // root == container level
@@ -19,13 +20,17 @@ const useStyles = makeStyles(theme => ({
       itembox: {
         // height: 100,
         // width: 100,
-        margin: 20
+        // margin: 5
       },
 
       paper: {
         padding: theme.spacing(2),
         height: 400,
         width: 350
+      },
+
+      button: {
+        padding: theme.spacing(2),
       },
   }));
 
@@ -37,7 +42,11 @@ export default function PaperSheet() {
             <Grid item className={classes.itembox}>
                 <Paper className={classes.paper}>
                     <div id="map"></div>
+                    <Button variant="contained" color="primary" className={classes.button}>Set Start Point</Button>
+                    <Button variant="contained" color="primary" className={classes.button}>Set End Point</Button>
+                    <Button variant="contained" color="primary" className={classes.button}>Reset</Button>
                 </Paper>
+                {/* <Paper>Button</Paper> */}
             </Grid>
 
             <Grid item className={classes.itembox}>
