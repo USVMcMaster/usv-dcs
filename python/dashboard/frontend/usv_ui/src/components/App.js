@@ -58,13 +58,11 @@ class App extends Component {
     return (
       <main>
         <ButtonAppBar />
-        {/* <div id="map"></div> */}
         <PaperSheet></PaperSheet>
       </main>
     );
   }
 }
-
 
 function loadScript(url) {
   // First element of all elements with tag name script
