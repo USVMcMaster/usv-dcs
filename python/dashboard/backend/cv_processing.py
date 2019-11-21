@@ -86,8 +86,8 @@ if __name__ == "__main__":
 
     path_src = tuple(list(true_src)[::-1])
     path_dst = tuple(list(true_dst)[::-1])
-
-    path, visited_boxes = pf.find_path(path_src, path_dst, pkl)
+    
+    path, visited_boxes = gen_path(path_src, path_dst, pkl)
 
     # list of paths -> path pairs -> points
     path = path_cleanup(path)
@@ -104,5 +104,5 @@ if __name__ == "__main__":
     cv2.circle(image, true_src,2,(0,255,0),2,8,0)
     cv2.circle(image, true_dst,2,(0,0,255),2,8,0)
 
-    cv2.imshow("path", image)
+    cv2.imshow("path", mask)
     cv2.waitKey(0)
