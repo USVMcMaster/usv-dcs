@@ -16,7 +16,12 @@ const useStyles = makeStyles(theme => ({
   // root == container level
   root: {
     flexGrow: 1,
-    padding: 20,
+    padding: theme.spacing(4),
+  },
+
+  gridItem: {
+    // padding: theme.spacing(2),
+    // width: "95%",
   },
 
   mapPaper: {
@@ -43,7 +48,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function ConsecutiveSnackbars() {
+export default function AutonomousBody() {
   const queueRef = React.useRef([]);
   const [open, setOpen] = React.useState(false);
   const [messageInfo, setMessageInfo] = React.useState(undefined);
@@ -92,7 +97,7 @@ export default function ConsecutiveSnackbars() {
               id="btn_start"
               variant="outlined"
               color="primary"
-              // onClick={handleClick('Click on the map to register the start point')}
+              onClick={handleClick('Click on the map to register the start point')}
               className={classes.button}>Set Start Point
             </Button>
           </Tooltip>
@@ -122,7 +127,7 @@ export default function ConsecutiveSnackbars() {
               id="btn_reset"
               variant="outlined"
               color="primary"
-              // onClick={handleClick('Test4')}
+              onClick={handleClick('Removed all markers')}
               className={classes.button}>Reset
             </Button>
           </Tooltip>
@@ -130,9 +135,17 @@ export default function ConsecutiveSnackbars() {
         </Grid>
       </Grid>
 
-      <Grid item xs>
+      {/* <Grid item xs={12} sm={6} xl={6}> */}
+      <Grid item xs={12} xl={6} spacing={3} className={classes.gridItem}>
         <Paper className={classes.mapPaper}>
-          <div id="map"></div>
+          {/* <div id="map"></div> */}
+          Map Here
+        </Paper>
+      </Grid>
+
+      <Grid item xs={12} xl={6} spacing={3} className={classes.gridItem}>
+        <Paper className={classes.mapPaper}>
+          Route Here
         </Paper>
       </Grid>
 
@@ -152,9 +165,9 @@ export default function ConsecutiveSnackbars() {
         }}
         message={<span id="message-id">{messageInfo ? messageInfo.message : undefined}</span>}
         action={[
-          <Button key="undo" color="secondary" size="small" onClick={handleClose}>
-            UNDO
-          </Button>,
+          // <Button key="undo" color="secondary" size="small" onClick={handleClose}>
+          //   UNDO
+          // </Button>,
           <IconButton
             key="close"
             aria-label="close"

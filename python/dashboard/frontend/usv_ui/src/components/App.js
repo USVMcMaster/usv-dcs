@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import ButtonAppBar from './templates/Header';
-import PaperSheet from './templates/bodyLayout';
 
+// Created sections from templates
+import HeaderManager from './templates/Header';
+import AutonomousBody from './templates/bodyLayout';
 
 class App extends Component {
 
@@ -57,8 +58,8 @@ class App extends Component {
   render() {
     return (
       <main>
-        <ButtonAppBar />
-        <PaperSheet></PaperSheet>
+        <HeaderManager />
+        <AutonomousBody />
       </main>
     );
   }
