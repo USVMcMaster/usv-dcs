@@ -6,26 +6,12 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Tooltip from '@material-ui/core/Tooltip'
-
-// Snacks
-// import Snackbar from '@material-ui/core/Snackbar';
-// import IconButton from '@material-ui/core/IconButton';
-// import CloseIcon from '@material-ui/icons/Close';
-
-// import Hello from './PathGen';
-
-// import { gen_map_snapshot } from './PathGen';
+import GetMapData from './GetMapData';
 
 const useStyles = makeStyles(theme => ({
-  // root == container level
   root: {
     flexGrow: 1,
     padding: theme.spacing(4),
-  },
-
-  gridItem: {
-    // padding: theme.spacing(2),
-    // width: "95%",
   },
 
   mapPaper: {
@@ -114,7 +100,7 @@ export default function AutonomousBody() {
 
         <Grid item xs={12} xl={6} className={classes.gridItem}>
           <Paper className={classes.mapPaper}>
-            Route Here
+            <GetMapData />
         </Paper>
         </Grid>
       </Grid>

@@ -1,5 +1,11 @@
-import React from 'react';
+import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
+import '../App.css';
+
+// Router
+import { Link } from 'react-router-dom';
+
+// Material-ui element imports below //
 
 // Top bar
 import AppBar from '@material-ui/core/AppBar';
@@ -19,6 +25,9 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from '@material-ui/core/Divider';
+
+// Home icon
+import HomeIcon from '@material-ui/icons/Home';
 
 // Icons for control modes
 import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
@@ -40,7 +49,7 @@ const useStyles = makeStyles(theme => ({
   },
 
   menuButton: {
-    // marginRight: theme.spacing(2),
+    textDecorationStyle: 'none'
   },
 
   listText: {
@@ -49,7 +58,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-export default function HeaderManager() {
+export default function Layout() {
   const classes = useStyles();
 
   // Drawer variables and functions
@@ -61,7 +70,7 @@ export default function HeaderManager() {
   });
 
   const toggleDrawer = (side, open) => event => {
-    
+
     // Allow tab and shift tab within drawer
     if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
@@ -69,6 +78,29 @@ export default function HeaderManager() {
 
     setState({ ...state, [side]: open });
   };
+
+  const home = side => {
+    return (
+      <div
+        className={classes.list}
+        role="presentation"
+        onClick={toggleDrawer(side, false)}
+        onKeyDown={toggleDrawer(side, false)}
+      >
+        <Link to={"/"}>
+          <List>
+            {/* Home button */}
+            <ListItem button key={"home"}>
+              <ListItemIcon>
+                <HomeIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Home"} />
+            </ListItem>
+          </List>
+        </Link>
+      </div>
+    );
+  }
 
   const controlList = side => {
     return (
@@ -78,23 +110,26 @@ export default function HeaderManager() {
         onClick={toggleDrawer(side, false)}
         onKeyDown={toggleDrawer(side, false)}
       >
-
         <List>
-          {/* RC Mode Button */}
-          <ListItem button key={"rc_mode"}>
-            <ListItemIcon>
-              <SportsEsportsIcon />
-            </ListItemIcon>
-            <ListItemText primary={"Remote Control Mode"} />
-          </ListItem>
+          <Link to={"/remote-control"}>
+            {/* RC Mode Button */}
+            <ListItem button key={"rc_mode"}>
+              <ListItemIcon>
+                <SportsEsportsIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Remote Control Mode"} />
+            </ListItem>
+          </Link>
 
           {/* Autonomous Mode Button */}
-          <ListItem button key={"auto_mode"}>
-            <ListItemIcon>
-              <DesktopWindowsIcon />
-            </ListItemIcon>
-            <ListItemText primary={"Autonomous Control Mode"} />
-          </ListItem>
+          <Link to={"/autonomous"}>
+            <ListItem button key={"auto_mode"}>
+              <ListItemIcon>
+                <DesktopWindowsIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Autonomous Control Mode"} />
+            </ListItem>
+          </Link>
 
         </List>
       </div>
@@ -102,6 +137,7 @@ export default function HeaderManager() {
   };
 
   const settingsList = side => {
+
     return (
       <div
         className={classes.list}
@@ -110,20 +146,32 @@ export default function HeaderManager() {
         onKeyDown={toggleDrawer(side, false)}
       >
         <List>
+          <Link to={"/tuning"}>
+            <ListItem button key={"pid_settings"}>
+              <ListItemIcon>
+                <TuneIcon />
+              </ListItemIcon>
+              <ListItemText primary={"PID Tuning Parameters"} />
+            </ListItem>
+          </Link>
 
-          <ListItem button key={"general_settings"}>
-            <ListItemIcon>
-              <SettingsIcon />
-            </ListItemIcon>
-            <ListItemText primary={"Settings"} />
-          </ListItem>
-          
-          <ListItem button key={"pid_settings"}>
-            <ListItemIcon>
-              <TuneIcon />
-            </ListItemIcon>
-            <ListItemText primary={"PID Tuning Parameters"} />
-          </ListItem>
+          <Link to={"/settings"}>
+            <ListItem button key={"general_settings"}>
+              <ListItemIcon>
+                <SettingsIcon />
+              </ListItemIcon>
+              <ListItemText primary={"Settings"} />
+            </ListItem>
+          </Link>
+
+          <Link to={"/about"}>
+            <ListItem button key={"about"}>
+              <ListItemIcon>
+                <SettingsIcon />
+              </ListItemIcon>
+              <ListItemText primary={"About"} />
+            </ListItem>
+          </Link>
 
         </List>
       </div>
@@ -145,12 +193,21 @@ export default function HeaderManager() {
               <MenuIcon />
             </IconButton>
 
-
+            {/* 
+              Laying out drawer.
+              home, controlList, and settingsList are generated here.
+            */}
             <SwipeableDrawer
               open={state.left}
               onClose={toggleDrawer("left", false)}
               onOpen={toggleDrawer("left", true)}
             >
+              <Typography variant='h5' className={classes.listText}>
+                USV Home Page
+                <Divider />
+                {home("left")}
+              </Typography>
+
               <Typography variant='h5' className={classes.listText}>
                 Control Modes
                 <Divider />
@@ -175,5 +232,3 @@ export default function HeaderManager() {
     </div>
   );
 }
-
-

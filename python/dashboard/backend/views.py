@@ -55,15 +55,21 @@ def gen_mask():
 
         # retval, encoded_image = cvp.cv2.imencode('.png', image)
 
-        final_image = base64.b64encode(image)
+        # final_image = base64.b64encode(image)
+        # print('\n\n\n', final_image, '\n\n\n')
 
         # response = make_response(encoded_image.tobytes())
+        response = make_response(image.tobytes())
+
         # response = make_response(base64.b64encode(encoded_image))
-        # response.headers['Content-Type'] = 'image/png'
-        # return response
+
+        response.headers['Content-Type'] = 'image/png'
+        return response
         
         # return jsonify(len(image.tolist()))
-        return jsonify({"points":points},{"path":path}, {"image":final_image})
+        # return jsonify({"id":1, "points":points},{"id":2, "path":path}, {"id":3, "image":final_image})
+    # return jsonify({"image":final_image})
+
         # return send_file("./processed_images/image.png", mimetype='image/png')
         # return jsonify({"mask":"./processed_images/mask.png"})
     

@@ -1,11 +1,9 @@
-import React, { Component } from 'react';
-import './App.css';
+import React, { useState, useEffect, Component } from 'react';
+import '../App.css';
+import { Link } from 'react-router-dom';
+import AutonomousBody from './AutonomousBody';
 
-// Created sections from templates
-import HeaderManager from './templates/Header';
-import AutonomousBody from './templates/bodyLayout';
-// import Test from './templates/PathGen';
-class App extends Component {
+class Autonomous extends Component {
 
   componentDidMount() {
     this.renderMap()
@@ -55,13 +53,10 @@ class App extends Component {
     window.initMap = this.initMap
   }
 
+
   render() {
     return (
-      <main>
-        <HeaderManager />
-        {/* <Test /> */}
-        <AutonomousBody />
-      </main>
+      <AutonomousBody />
     );
   }
 }
@@ -80,4 +75,37 @@ function loadScript(url) {
   index.parentNode.insertBefore(script, index)
 }
 
-export default App;
+export default Autonomous;
+
+
+
+// function Autonomous() {
+
+//   // Only runs on component mount
+//   useEffect(() => {
+//     fetchItems()
+//   }, []);
+
+//   const [items, setItems] = useState([]);
+
+//   const fetchItems = async () => {
+//     const data = await fetch(
+//       'https://jsonplaceholder.typicode.com/users'
+//     );
+
+//     const items = await data.json();
+//     console.log(items);
+//     setItems(items);
+//   }
+
+//   return (
+//     <div>
+//       {/* Dynamic routing example */}
+//       {items.map(item => (
+//         <h1 key={item.id}>
+//           <Link to={`/autonomous/${item.id}`}>{item.name}</Link>
+//         </h1>
+//       ))}
+//     </div>
+//   );
+// }
