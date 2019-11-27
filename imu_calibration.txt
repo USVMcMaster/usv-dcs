@@ -1,0 +1,10 @@
+Clearing any previous calibration data...
+Starting sampling... start moving device now.
+Try to draw out as much of a sphere as possible, then press stop
+Starting Calibration with 2720 samples.
+Calibration Completed
+Parameters (magField, offset0-1-2, gain0-1-2, T0-1-2-3-4-5):
+
+0.58287, -0.13254, 0.02107, -0.06440, 1.60358, 1.59860, 1.94478, -0.00012, 0.00555, -0.00160, -0.01198, 0.00558, -0.01426
+Calibration successful.
+Calibration values have been written to firmware on your spatial. These values will be maintained from now on, across power cycles, until explicitely reset or changed.
