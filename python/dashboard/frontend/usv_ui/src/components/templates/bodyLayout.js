@@ -8,9 +8,11 @@ import Button from '@material-ui/core/Button';
 import Tooltip from '@material-ui/core/Tooltip'
 
 // Snacks
-import Snackbar from '@material-ui/core/Snackbar';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
+// import Snackbar from '@material-ui/core/Snackbar';
+// import IconButton from '@material-ui/core/IconButton';
+// import CloseIcon from '@material-ui/icons/Close';
+
+// import Hello from './PathGen';
 
 const useStyles = makeStyles(theme => ({
   // root == container level
@@ -49,43 +51,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function AutonomousBody() {
-  const queueRef = React.useRef([]);
-  const [open, setOpen] = React.useState(false);
-  const [messageInfo, setMessageInfo] = React.useState(undefined);
-
-  const processQueue = () => {
-    if (queueRef.current.length > 0) {
-      setMessageInfo(queueRef.current.shift());
-      setOpen(true);
-    }
-  };
-
-  // eslint-disable-next-line
-  const handleClick = message => () => {
-    queueRef.current.push({
-      message,
-      key: new Date().getTime(),
-    });
-
-    if (open) {
-      // immediately begin dismissing current message
-      // to start showing new one
-      setOpen(false);
-    } else {
-      processQueue();
-    }
-  };
-
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setOpen(false);
-  };
-
-  const handleExited = () => {
-    processQueue();
-  };
 
   const classes = useStyles();
   return (
@@ -97,7 +62,7 @@ export default function AutonomousBody() {
               id="btn_start"
               variant="outlined"
               color="primary"
-              onClick={handleClick('Click on the map to register the start point')}
+              // onClick={handleClick('Click on the map to register the start point')}
               className={classes.button}>Set Start Point
             </Button>
           </Tooltip>
@@ -118,6 +83,7 @@ export default function AutonomousBody() {
               variant="outlined"
               color="primary"
               // onClick={handleClick('Test3')}
+              // onClick={Hello}
               className={classes.button}>Generate Path
            </Button>
           </Tooltip>
@@ -127,7 +93,7 @@ export default function AutonomousBody() {
               id="btn_reset"
               variant="outlined"
               color="primary"
-              onClick={handleClick('Removed all markers')}
+              // onClick={handleClick('Removed all markers')}
               className={classes.button}>Reset
             </Button>
           </Tooltip>
@@ -136,49 +102,20 @@ export default function AutonomousBody() {
       </Grid>
 
       {/* <Grid item xs={12} sm={6} xl={6}> */}
-      <Grid item xs={12} xl={6} spacing={3} className={classes.gridItem}>
-        <Paper className={classes.mapPaper}>
-          {/* <div id="map"></div> */}
-          Map Here
+      <Grid container>
+        <Grid item xs={12} xl={6} className={classes.gridItem}>
+          <Paper className={classes.mapPaper}>
+            <div id="map"></div>
+            Map Here
         </Paper>
-      </Grid>
+        </Grid>
 
-      <Grid item xs={12} xl={6} spacing={3} className={classes.gridItem}>
-        <Paper className={classes.mapPaper}>
-          Route Here
+        <Grid item xs={12} xl={6} className={classes.gridItem}>
+          <Paper className={classes.mapPaper}>
+            Route Here
         </Paper>
+        </Grid>
       </Grid>
-
-      {/* Snackbar handler */}
-      <Snackbar
-        key={messageInfo ? messageInfo.key : undefined}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
-        }}
-        open={open}
-        autoHideDuration={6000}
-        onClose={handleClose}
-        onExited={handleExited}
-        ContentProps={{
-          'aria-describedby': 'message-id',
-        }}
-        message={<span id="message-id">{messageInfo ? messageInfo.message : undefined}</span>}
-        action={[
-          // <Button key="undo" color="secondary" size="small" onClick={handleClose}>
-          //   UNDO
-          // </Button>,
-          <IconButton
-            key="close"
-            aria-label="close"
-            color="inherit"
-            className={classes.close}
-            onClick={handleClose}
-          >
-            <CloseIcon />
-          </IconButton>,
-        ]}
-      />
     </div>
   );
 }
