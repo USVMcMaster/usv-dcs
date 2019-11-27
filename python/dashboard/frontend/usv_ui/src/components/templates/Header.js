@@ -48,6 +48,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+
 export default function HeaderManager() {
   const classes = useStyles();
 
@@ -60,6 +61,8 @@ export default function HeaderManager() {
   });
 
   const toggleDrawer = (side, open) => event => {
+    
+    // Allow tab and shift tab within drawer
     if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }

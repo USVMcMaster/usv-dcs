@@ -4,7 +4,7 @@ import './App.css';
 // Created sections from templates
 import HeaderManager from './templates/Header';
 import AutonomousBody from './templates/bodyLayout';
-
+// import Test from './templates/PathGen';
 class App extends Component {
 
   componentDidMount() {
@@ -32,7 +32,7 @@ class App extends Component {
 
       marker_count++
       console.log(marker_count)
-      console.log(markers[marker_count])
+      // console.log(markers[marker_count])
     }
 
     // Handler for single click event
@@ -59,6 +59,7 @@ class App extends Component {
     return (
       <main>
         <HeaderManager />
+        {/* <Test /> */}
         <AutonomousBody />
       </main>
     );

@@ -1,6 +1,7 @@
-from flask import Blueprint, jsonify, request, make_response
-
+from flask import Blueprint, jsonify, request, make_response, send_file
+import base64
 import cv_processing as cvp
+
 
 main = Blueprint('main', __name__)
 
@@ -48,10 +49,23 @@ def gen_mask():
         cvp.cv2.circle(image, true_src,2,(0,255,0),2,8,0)
         cvp.cv2.circle(image, true_dst,2,(0,0,255),2,8,0)
 
-        retval, encoded_image = cvp.cv2.imencode('.png', image)
-        response = make_response(encoded_image.tobytes())
-        response.headers['Content-Type'] = 'image/png'
-        return response
+        cvp.cv2.imwrite("./processed_images/image.png", image)
+        cvp.cv2.imwrite("./processed_images/mask.png", mask)
+        cvp.cv2.imwrite("./processed_images/mesh.png", mesh_image)
+
+        # retval, encoded_image = cvp.cv2.imencode('.png', image)
+
+        final_image = base64.b64encode(image)
+
+        # response = make_response(encoded_image.tobytes())
+        # response = make_response(base64.b64encode(encoded_image))
+        # response.headers['Content-Type'] = 'image/png'
+        # return response
+        
+        # return jsonify(len(image.tolist()))
+        return jsonify({"points":points},{"path":path}, {"image":final_image})
+        # return send_file("./processed_images/image.png", mimetype='image/png')
+        # return jsonify({"mask":"./processed_images/mask.png"})
     
     return 'Provide a static map url for path planning'
 

@@ -14,6 +14,8 @@ import Tooltip from '@material-ui/core/Tooltip'
 
 // import Hello from './PathGen';
 
+// import { gen_map_snapshot } from './PathGen';
+
 const useStyles = makeStyles(theme => ({
   // root == container level
   root: {
@@ -82,8 +84,8 @@ export default function AutonomousBody() {
               id="btn_generate"
               variant="outlined"
               color="primary"
-              // onClick={handleClick('Test3')}
-              // onClick={Hello}
+              // onClick={gen_map_snapshot}
+              // value={[12,13,14]}
               className={classes.button}>Generate Path
            </Button>
           </Tooltip>
