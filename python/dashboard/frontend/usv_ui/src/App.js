@@ -1,15 +1,17 @@
 import React from 'react';
 import './App.css';
-
-import Autonomous from './components/Autonomous';
-import About from './components/About';
-import Navigation from './components/Navigation';
-// import DynamicRoutingExample from './components/DynamicRoutingExample';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import RemoteControl from './components/RemoteControl';
-import Settings from './components/Settings';
-import Tuning from './components/Tuning';
 
+import Navigation from './components/Navigation';
+
+import Home from './components/Home';
+
+import RemoteControl from './components/RemoteControl';
+import Autonomous from './components/Autonomous';
+
+import Tuning from './components/Tuning';
+import Settings from './components/Settings';
+import About from './components/About';
 
 function App() {
   return (
@@ -27,20 +29,10 @@ function App() {
           <Route path="/tuning" exact component={Tuning} />
           <Route path="/settings" exact component={Settings} />
           <Route path="/about" exact component={About} />
-
-          {/* Dynamic routing example */}
-          {/* <Route path="/automonous/:id" component={DynamicRoutingExample}/> */}
         </Switch>
       </div>
     </Router>
   );
 }
-
-const Home = () => (
-  <div>
-    <h1>Home Page</h1>
-  </div>
-
-);
 
 export default App;

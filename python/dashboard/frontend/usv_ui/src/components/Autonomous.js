@@ -1,9 +1,12 @@
-import React, { useState, useEffect, Component } from 'react';
+import React, { Component } from 'react';
 import '../App.css';
-import { Link } from 'react-router-dom';
 import AutonomousBody from './AutonomousBody';
 
+var start;
+var end;
+
 class Autonomous extends Component {
+
 
   componentDidMount() {
     this.renderMap()
@@ -23,14 +26,26 @@ class Autonomous extends Component {
 
     function addMarker(latLng, map) {
       // eslint-disable-next-line
-      markers[marker_count] = new window.google.maps.Marker({
-        position: { lat: latLng.lat(), lng: latLng.lng() },
-        map: map
-      });
+      if (marker_count < 2) {
+        markers[marker_count] = new window.google.maps.Marker({
+          position: { lat: latLng.lat(), lng: latLng.lng() },
+          map: map
+        });
 
-      marker_count++
-      console.log(marker_count)
-      // console.log(markers[marker_count])
+        if (marker_count === 0) {
+          start = markers[marker_count]
+          console.log(start)
+        }
+
+        if (marker_count === 1) {
+          end = markers[marker_count]
+          console.log(end)
+        }
+        marker_count++
+      }
+      else {
+        console.log("Reached max markers")
+      }      
     }
 
     // Handler for single click event
