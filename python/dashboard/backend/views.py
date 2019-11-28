@@ -1,17 +1,13 @@
 from flask import Blueprint, jsonify, request, make_response, send_file
 import base64
 import cv_processing as cvp
-
+import json
 
 main = Blueprint('main', __name__)
 
 @main.route('/')
 def landing_page():
     return "Welcome to the landing page of the USV Capstone Project!"
-
-@main.route('/test_data')
-def test_data():
-    return jsonify(['a','b'])
 
 @main.route('/mask', methods=['GET'])
 def gen_mask():
@@ -49,29 +45,15 @@ def gen_mask():
         cvp.cv2.circle(image, true_src,2,(0,255,0),2,8,0)
         cvp.cv2.circle(image, true_dst,2,(0,0,255),2,8,0)
 
-        cvp.cv2.imwrite("./processed_images/image.png", image)
-        cvp.cv2.imwrite("./processed_images/mask.png", mask)
-        cvp.cv2.imwrite("./processed_images/mesh.png", mesh_image)
+        # cvp.cv2.imwrite("./processed_images/image.png", image)
+        # cvp.cv2.imwrite("./processed_images/mask.png", mask)
+        # cvp.cv2.imwrite("./processed_images/mesh.png", mesh_image)
 
-        # retval, encoded_image = cvp.cv2.imencode('.png', image)
-
-        # final_image = base64.b64encode(image)
-        # print('\n\n\n', final_image, '\n\n\n')
-
-        # response = make_response(encoded_image.tobytes())
-        response = make_response(image.tobytes())
-
-        # response = make_response(base64.b64encode(encoded_image))
-
-        response.headers['Content-Type'] = 'image/png'
-        return response
+        points = json.dumps(points)
+        path = json.dumps(path)
         
-        # return jsonify(len(image.tolist()))
-        # return jsonify({"id":1, "points":points},{"id":2, "path":path}, {"id":3, "image":final_image})
-    # return jsonify({"image":final_image})
-
-        # return send_file("./processed_images/image.png", mimetype='image/png')
-        # return jsonify({"mask":"./processed_images/mask.png"})
+        output = jsonify({"id":"points", "data":points}, {"id":"path", "data":path})
+        return output
     
     return 'Provide a static map url for path planning'
 
