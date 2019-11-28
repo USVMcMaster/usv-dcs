@@ -3,7 +3,7 @@ import './App.css';
 
 import Autonomous from './components/Autonomous';
 import About from './components/About';
-import Layout from './components/Layout';
+import Navigation from './components/Navigation';
 // import DynamicRoutingExample from './components/DynamicRoutingExample';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import RemoteControl from './components/RemoteControl';
@@ -16,7 +16,7 @@ function App() {
     <Router>
       <div className="App">
         {/* <Nav /> */}
-        <Layout />
+        <Navigation />
         {/* Switch forces router to stop on first match of path */}
         <Switch>
           <Route path="/" exact component={Home} />

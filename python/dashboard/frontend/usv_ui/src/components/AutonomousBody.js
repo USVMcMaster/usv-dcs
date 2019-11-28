@@ -50,7 +50,6 @@ export default function AutonomousBody() {
               id="btn_start"
               variant="outlined"
               color="primary"
-              // onClick={handleClick('Click on the map to register the start point')}
               className={classes.button}>Set Start Point
             </Button>
           </Tooltip>
@@ -60,7 +59,6 @@ export default function AutonomousBody() {
               id="btn_end"
               variant="outlined"
               color="primary"
-              // onClick={handleClick('Click on the map to register the end point')}
               className={classes.button}>Set End Point
            </Button>
           </Tooltip>
@@ -70,8 +68,6 @@ export default function AutonomousBody() {
               id="btn_generate"
               variant="outlined"
               color="primary"
-              // onClick={gen_map_snapshot}
-              // value={[12,13,14]}
               className={classes.button}>Generate Path
            </Button>
           </Tooltip>
@@ -81,7 +77,6 @@ export default function AutonomousBody() {
               id="btn_reset"
               variant="outlined"
               color="primary"
-              // onClick={handleClick('Removed all markers')}
               className={classes.button}>Reset
             </Button>
           </Tooltip>
@@ -94,7 +89,6 @@ export default function AutonomousBody() {
         <Grid item xs={12} xl={6} className={classes.gridItem}>
           <Paper className={classes.mapPaper}>
             <div id="map"></div>
-            Map Here
         </Paper>
         </Grid>
 
